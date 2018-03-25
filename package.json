@@ -1,0 +1,19 @@
+{
+  "name": "aquariumlogserver",
+  "version": "1.0.0",
+  "description": "GraphQL Express server for AquariumLog",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sillyquiet/aquariumlog-server.git"
+  },
+  "author": "Matthew Riley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sillyquiet/aquariumlog-server/issues"
+  },
+  "homepage": "https://github.com/sillyquiet/aquariumlog-server#readme"
+}
