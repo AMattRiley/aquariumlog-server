@@ -1,0 +1,6 @@
+node_modules/*
+db/*
+*.sqlite*
+images/*
+.DS_Store
+.vscode/
