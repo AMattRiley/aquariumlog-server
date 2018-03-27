@@ -47,14 +47,15 @@ const transformFish = (rows) => {
 // The resolvers
 const resolvers = {
   Query: {
-    fish: () => {
-      return Promise.resolve(initDB()).catch((err) => {
+    fish: async () => {
+      try {
+        const db = await initDB();
+        const fishRows = await getAllFish(db);
+        return transformFish(fishRows);
+      } catch (err) {
         console.log(err);
-      }).then((db) => getAllFish(db)).then((fish) => {
-        return transformFish(fish);
-      }).catch((err) => {
-        console.log(err);
-      })
+        return [];
+      }
     }
   }
 };

@@ -49,7 +49,7 @@ const initDB = () => {
    
 }
 
-const getAllFish = async (db) => {
+const getAllFish = (db) => {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
             db.all(selectAllFish, (err, rows) => {
