@@ -1,9 +1,10 @@
+import sqlite3 from 'sqlite3';
 
-const sqlite3 = require('sqlite3').verbose();
+let selectAllFish: string;
+let db: sqlite3.Database;
+sqlite3.verbose();
 
-let selectAllFish;
-
-const closeDB = (db) => {
+export const closeDB: (db: sqlite3.Database) => Promise<void> = (db) => {
     if (!db) {
         return Promise.resolve();
     }
@@ -20,9 +21,13 @@ const closeDB = (db) => {
    
 }
 
-const initDB = () => {
+export const initDB: () => Promise<sqlite3.Database> = () => {
     return new Promise((resolve, reject) => {
-        db = new sqlite3.cached.Database('./db/AquariumLog.sqlite', sqlite3.OPEN_READONLY, (err) => {
+        if (db) {
+            resolve(db);
+            return;
+        }
+        db = new sqlite3.Database('./db/AquariumLog.sqlite', sqlite3.OPEN_READONLY, (err) => {
             if (err) {
               reject(err.message);
               return;
@@ -45,11 +50,11 @@ const initDB = () => {
 
             resolve(db);
           });
-    })
+    });
    
 }
 
-const getAllFish = (db) => {
+export const getAllFish: (db: sqlite3.Database) => Promise<any[]> = (db) => {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
             db.all(selectAllFish, (err, rows) => {
@@ -63,9 +68,3 @@ const getAllFish = (db) => {
     });
    
 };
-
-module.exports = {
-    initDB,
-    closeDB,
-    getAllFish
-}
